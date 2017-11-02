@@ -1,0 +1,63 @@
+Option Explicit
+Option Base 0
+
+
+Sub zapusk()
+
+Dim Class2 As Class1
+Set Class2 = New Class1
+
+Class2.Class_Initialize
+Class2.push (7)
+Class2.push (8)
+MsgBox (Class2.Peek)
+MsgBox (Class2.Size)
+Class2.pop
+MsgBox (Class2.Peek)
+MsgBox (Class2.Size)
+
+Set Class2 = Nothing
+
+
+End Sub
+
+
+
+------ class1 definition -------------------
+
+Option Explicit
+Option Base 0
+
+Private count As Integer
+
+Private MyArray(10) As Integer
+
+Public Sub Class_Initialize()
+   count = 0
+End Sub
+
+Private Sub Class_Terminate()
+
+End Sub
+
+
+Public Function push(value As Integer)
+    MyArray(count) = value
+    count = count + 1
+End Function
+
+Public Function pop() As Integer
+    If count = 0 Then
+        Exit Function
+    End If
+    count = count - 1
+    pop = MyArray(count)
+End Function
+
+Public Function Size() As Integer
+    Size = count
+End Function
+
+Public Function Peek() As Integer
+    Peek = MyArray(count - 1)
+End Function
