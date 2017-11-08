@@ -1,0 +1,43 @@
+Option Explicit
+
+Sub Кнопка1_Щелчок()
+    Cells.Select
+    Selection.Clear
+    
+    Dim cn As New ADODB.Connection
+    cn.ConnectionString = "Provider=OraOLEDB.Oracle;Data Source=MYBAZA;User ID=ADMIN;Password=PASS;"
+    cn.Open
+    
+    Dim rs As New ADODB.Recordset
+    rs.Open "select * from z#table where rownum<20", cn
+    
+    Лист1.Range("A4").CopyFromRecordset rs
+    
+    Cells(3, 1).Value = "ID"
+    Cells(3, 2).Value = "TYPE"
+    Cells(3, 3).Value = "STATUS"
+    Cells(3, 4).Value = "NUM"
+    
+        
+    Dim MyCach As PivotCache
+    Dim MyTable As PivotTable
+    
+    Set MyCach = ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, SourceData:="Лист1!R3C1:R15C2")
+      
+        
+    Worksheets.Add
+    
+    Set MyTable = ActiveSheet.PivotTables.Add(PivotCache:=MyCach, TableDestination:=Range("A3"))
+    With MyTable
+        .PivotFields("ID").Orientation = xlPageField
+        .PivotFields("TYPE").Orientation = xlPageField
+    End With
+    
+    
+    
+    
+    
+    
+       
+    
+End Sub
