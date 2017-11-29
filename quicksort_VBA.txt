@@ -1,0 +1,59 @@
+Option Explicit
+
+Dim arr3(1 To 10) As Integer
+
+Sub start()
+    arr3(1) = 4
+    arr3(2) = 3
+    arr3(3) = 10
+    arr3(4) = 1
+    arr3(5) = 9
+    arr3(6) = 8
+    arr3(7) = 5
+    arr3(8) = 6
+    arr3(9) = 2
+    arr3(10) = 7
+    MsgBox arr3(1) & ";" & arr3(2) & ";" & arr3(3) & ";" & arr3(4) & ";" & arr3(5) & ";" & arr3(6) & ";" & arr3(7) & ";" & arr3(8) & ";" & arr3(9) & ";" & arr3(10)
+    'Call quicksort(arr3, 1, 10)
+    Call quicksort(arr3, 1, 10)
+    MsgBox arr3(1) & ";" & arr3(2) & ";" & arr3(3) & ";" & arr3(4) & ";" & arr3(5) & ";" & arr3(6) & ";" & arr3(7) & ";" & arr3(8) & ";" & arr3(9) & ";" & arr3(10)
+End Sub
+
+
+
+
+
+Sub quicksort(IntArr() As Integer, low As Integer, high As Integer)
+    Dim medium As Integer
+    Dim temp As Integer, i As Integer, j As Integer
+    
+    i = low
+    j = high
+    medium = IntArr((low + high) / 2)
+    
+    Do While i <= j
+        Do While IntArr(i) < medium And i < high
+            i = i + 1
+        Loop
+        Do While medium < IntArr(j) And j > low
+            j = j - 1
+        Loop
+        
+        If i < j Then
+            temp = IntArr(i)
+            IntArr(i) = IntArr(j)
+            IntArr(j) = temp
+        End If
+        If i <= j Then
+            i = i + 1
+            j = j - 1
+        End If
+    Loop
+    If low < j Then Call quicksort(IntArr, low, j)
+    If i < high Then Call quicksort(IntArr, i, high)
+    
+    'MsgBox IntArr(1) & IntArr(2) & IntArr(3) & IntArr(4) & IntArr(5) & IntArr(6) & IntArr(7) & IntArr(8) & IntArr(9) & IntArr(10)
+
+End Sub
+
+
